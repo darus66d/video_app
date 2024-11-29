@@ -10,28 +10,57 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
 
-  YoutubePlayerController _controller = YoutubePlayerController(
-    initialVideoId: 'orvJCBTodiY',
+late YoutubePlayerController ytController;
+ String videoUrl= "https://www.youtube.com/watch?v=JnX7Oc8LqD8&t=269s";
+
+  @override
+  void initState() {
+    videoUrl = YoutubePlayer.convertUrlToId(videoUrl)!;
+    print(videoUrl);
+    // TODO: implement initState
+    super.initState();
+    ytController = YoutubePlayerController(
+        initialVideoId: videoUrl,
+      flags: YoutubePlayerFlags(
+        autoPlay: false,
+      )
+    );
+  }
+
+  /*YoutubePlayerController _controller = YoutubePlayerController(
+    initialVideoId: 'HM_OGtwR2jM',
     flags: YoutubePlayerFlags(
       autoPlay: true,
       mute: true,
     ),
-  );
+  );*/
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
-        child: YoutubePlayer(
-          controller: _controller,
-         /* showVideoProgressIndicator: true,
-          progressIndicatorColor: Colors.amber,
-          progressColors: const ProgressBarColors(
-            playedColor: Colors.amber,
-            handleColor: Colors.amberAccent,
-          ),
-          onReady: () {
-            _controller.addListener(listener);
-          },*/
+      appBar: AppBar(
+        title: Text("Video_Project"),
+        centerTitle: true,
+      ),
+      body: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Column(
+          children: [
+            ClipRRect(
+              borderRadius: BorderRadius.circular(10),
+              child: YoutubePlayer(
+                controller: ytController,
+               /* showVideoProgressIndicator: true,
+                progressIndicatorColor: Colors.amber,
+                progressColors: const ProgressBarColors(
+                  playedColor: Colors.amber,
+                  handleColor: Colors.amberAccent,
+                ),
+                onReady: () {
+                  _controller.addListener(listener);
+                },*/
+              ),
+            ),
+          ],
         ),
       ),
     );
