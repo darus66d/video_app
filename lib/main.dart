@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:video_app/home_screen.dart';
+
 
 void main() {
   runApp(const  VideoApp());
@@ -9,6 +11,7 @@ class VideoApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: "VideoApp",
       theme: ThemeData(),
       home: HomeScreen(),
@@ -18,17 +21,5 @@ class VideoApp extends StatelessWidget {
   }
 }
 
-class HomeScreen extends StatefulWidget {
-  const HomeScreen({super.key});
 
-  @override
-  State<HomeScreen> createState() => _HomeScreenState();
-}
-
-class _HomeScreenState extends State<HomeScreen> {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold();
-  }
-}
 
