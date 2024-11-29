@@ -11,7 +11,7 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
 
   YoutubePlayerController _controller = YoutubePlayerController(
-    initialVideoId: 'iLnmTe5Q2Qw',
+    initialVideoId: 'orvJCBTodiY',
     flags: YoutubePlayerFlags(
       autoPlay: true,
       mute: true,
@@ -19,6 +19,21 @@ class _HomeScreenState extends State<HomeScreen> {
   );
   @override
   Widget build(BuildContext context) {
-    return Scaffold();
+    return Scaffold(
+      body: Center(
+        child: YoutubePlayer(
+          controller: _controller,
+         /* showVideoProgressIndicator: true,
+          progressIndicatorColor: Colors.amber,
+          progressColors: const ProgressBarColors(
+            playedColor: Colors.amber,
+            handleColor: Colors.amberAccent,
+          ),
+          onReady: () {
+            _controller.addListener(listener);
+          },*/
+        ),
+      ),
+    );
   }
 }
