@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:video_app/video_list_screen.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -11,6 +12,8 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
 
 late YoutubePlayerController ytController;
+
+
  String videoUrl= "https://www.youtube.com/watch?v=JnX7Oc8LqD8&t=269s";
 
   @override
@@ -27,7 +30,16 @@ late YoutubePlayerController ytController;
     );
   }
 
-  /*YoutubePlayerController _controller = YoutubePlayerController(
+   List<String> urls =[
+
+  "https://www.youtube.com/watch?v=JnX7Oc8LqD8&t=269s",
+  "https://www.youtube.com/watch?v=39uMLYTh40Q&t=164s",
+  "https://www.youtube.com/watch?v=bh5dGdbHCVc&t=89s",
+  "https://www.youtube.com/watch?v=d1tf9MMDfWw",
+];
+
+
+/*YoutubePlayerController _controller = YoutubePlayerController(
     initialVideoId: 'HM_OGtwR2jM',
     flags: YoutubePlayerFlags(
       autoPlay: true,
@@ -41,26 +53,47 @@ late YoutubePlayerController ytController;
         title: Text("Video_Project"),
         centerTitle: true,
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Column(
-          children: [
-            ClipRRect(
-              borderRadius: BorderRadius.circular(10),
-              child: YoutubePlayer(
-                controller: ytController,
-               /* showVideoProgressIndicator: true,
-                progressIndicatorColor: Colors.amber,
-                progressColors: const ProgressBarColors(
-                  playedColor: Colors.amber,
-                  handleColor: Colors.amberAccent,
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Column(
+            children: [
+              
+              ClipRRect(
+                borderRadius: BorderRadius.circular(10),
+                child: YoutubePlayer(
+                  controller: ytController,
+                 /* showVideoProgressIndicator: true,
+                  progressIndicatorColor: Colors.amber,
+                  progressColors: const ProgressBarColors(
+                    playedColor: Colors.amber,
+                    handleColor: Colors.amberAccent,
+                  ),
+                  onReady: () {
+                    _controller.addListener(listener);
+                  },*/
                 ),
-                onReady: () {
-                  _controller.addListener(listener);
-                },*/
               ),
-            ),
-          ],
+              Padding(
+                padding: const EdgeInsets.only(top: 8.0),
+                child: GridView.builder(
+                  shrinkWrap: true,
+                  primary: false,
+                  itemCount: urls.length,
+                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: 2,
+                      mainAxisSpacing: 10,
+                      crossAxisSpacing: 10,
+                      childAspectRatio: 1/0.6,
+
+                    ),
+                    itemBuilder: (context,index){
+                    return VideoListScreen(videoUrl: 'https://www.youtube.com/watch?v=JnX7Oc8LqD8&t=269s',);
+                    }
+                ),
+              )
+            ],
+          ),
         ),
       ),
     );

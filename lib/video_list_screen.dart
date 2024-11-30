@@ -3,9 +3,9 @@ import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
 class VideoListScreen extends StatefulWidget {
 
-  late String videoUrl;
+  final String videoUrl;
 
-  const VideoListScreen({super.key});
+  const VideoListScreen({super.key, required this.videoUrl});
 
   @override
   State<VideoListScreen> createState() => _VideoListScreenState();
@@ -13,16 +13,18 @@ class VideoListScreen extends StatefulWidget {
 
 class _VideoListScreenState extends State<VideoListScreen> {
 
+  late YoutubePlayerController ytController;
+
   late String videoID;
+
 
   @override
   void initState() {
-    videoID = YoutubePlayer.convertUrlToId(videoUrl)!;
-    print(videoUrl);
+    videoID = YoutubePlayer.convertUrlToId(widget.videoUrl)!;
     // TODO: implement initState
     super.initState();
     ytController = YoutubePlayerController(
-        initialVideoId: videoUrl,
+        initialVideoId: videoID,
         flags: YoutubePlayerFlags(
           autoPlay: false,
         )
@@ -34,6 +36,6 @@ class _VideoListScreenState extends State<VideoListScreen> {
       child: YoutubePlayer(
         controller: ytController,
       ),
-    ),;
+    );
   }
 }
