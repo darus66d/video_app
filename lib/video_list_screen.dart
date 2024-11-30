@@ -26,7 +26,14 @@ class _VideoListScreenState extends State<VideoListScreen> {
     ytController = YoutubePlayerController(
         initialVideoId: videoID,
         flags: YoutubePlayerFlags(
+          hideControls: true,
           autoPlay: false,
+          mute: true,
+          disableDragSeek: false,
+          loop: false,
+          isLive: false,
+          forceHD: false,
+          enableCaption: false,
         )
     );
   }

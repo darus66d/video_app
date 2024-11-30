@@ -31,10 +31,10 @@ late YoutubePlayerController ytController;
   }
 
    List<String> urls =[
-
   "https://www.youtube.com/watch?v=JnX7Oc8LqD8&t=269s",
   "https://www.youtube.com/watch?v=39uMLYTh40Q&t=164s",
   "https://www.youtube.com/watch?v=bh5dGdbHCVc&t=89s",
+  "https://www.youtube.com/watch?v=d1tf9MMDfWw",
   "https://www.youtube.com/watch?v=d1tf9MMDfWw",
 ];
 
@@ -58,7 +58,7 @@ late YoutubePlayerController ytController;
           padding: const EdgeInsets.all(8.0),
           child: Column(
             children: [
-              
+
               ClipRRect(
                 borderRadius: BorderRadius.circular(10),
                 child: YoutubePlayer(
@@ -75,6 +75,10 @@ late YoutubePlayerController ytController;
                 ),
               ),
               Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Text(ytController.metadata.title,style: TextStyle(color: Colors.black),),
+              ),
+              Padding(
                 padding: const EdgeInsets.only(top: 8.0),
                 child: GridView.builder(
                   shrinkWrap: true,
@@ -88,7 +92,19 @@ late YoutubePlayerController ytController;
 
                     ),
                     itemBuilder: (context,index){
-                    return VideoListScreen(videoUrl: 'https://www.youtube.com/watch?v=JnX7Oc8LqD8&t=269s',);
+                    return InkWell(
+                      onTap: (){
+                        videoUrl = urls[index];
+                        final String? videoID = YoutubePlayer.convertUrlToId(videoUrl);
+                        ytController.load(videoID!);
+                        setState(() {
+
+                        });
+
+                      },
+
+
+                        child: VideoListScreen(videoUrl: urls[index],));
                     }
                 ),
               )
